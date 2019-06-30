@@ -20,12 +20,6 @@ app
     server.get('/newslist', (req, res) => {
         (
             async function(){
-                /*
-                var whr = '';
-                if(req.query.date_filter != 0){
-                    whr = 'WHERE publish_date >= ' + req.query.date_filter + ' 00:00:00 AND publish_date <= ' + req.query.date_filter + ' 23:59:59';
-                }
-                */
                 var usql = sql`
                     SELECT id, title, cover_image, description, publish_date
                     FROM news
@@ -111,8 +105,9 @@ app
         res.status(200).json({ output });
     });
 
-    server.listen(3000, err => {
+    server.listen(process.env.PORT || 3000, err => {
       if (err) throw err;
+        console.log(process.env.PORT);
       console.log('> Ready on http://localhost:3000');
     });
   })
